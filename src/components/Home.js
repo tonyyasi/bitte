@@ -28,8 +28,8 @@ export default class Home extends React.Component {
         return (
             <div>
             <Header />
-                <h1>Home</h1>
-                <h3>Welcome</h3>
+                <h1>Welcome to Bitte!</h1>
+                <h3> Your food, when you need it!</h3>
             </div>
         );
     }

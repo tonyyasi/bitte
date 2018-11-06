@@ -25,10 +25,10 @@ export class Header extends React.Component {
     render() {
         return (
     <header>
-        <div className="navItems">
-        <NavLink className="nav" activeClassName="is-active" exact={true} to ="/app/home">Home</NavLink>
-        <NavLink className="nav" activeClassName="is-active" to ="/app/order">Order</NavLink>
-        <button onClick={this.handleLogout}>Logout</button>
+        <div >
+        <NavLink className="nav navItems" activeClassName="is-active" exact={true} to ="/app/home">Home</NavLink>
+        <NavLink className="nav navItems" activeClassName="is-active" to ="/app/order">Order</NavLink>
+        <button className="logoutButton" onClick={this.handleLogout}>Logout</button>
         </div>
     </header>
         );
