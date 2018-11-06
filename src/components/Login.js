@@ -21,17 +21,14 @@ export default class Login extends React.Component {
     handleGoogleLogin() {
         loginWithGoogle()
             .catch(function (error) {
-                alert(error); // or show toast
+                alert(error); 
                 localStorage.removeItem(firebaseAuthKey);
             });
         localStorage.setItem(firebaseAuthKey, "1");
     }
 
-    componentWillMount() {
-
-        /**
-         * We have appToken relevant for our backend API
-         */
+    componentWillMount() {  
+        // We have appToken relevant for our backend API, redirect home
         if (localStorage.getItem(appTokenKey)) {
             this.props.history.push("/app/home");
             return;
@@ -43,12 +40,9 @@ export default class Login extends React.Component {
 
                 localStorage.removeItem(firebaseAuthKey);
 
-                // here you could authenticate with you web server to get the
-                // application specific token so that you do not have to
-                // authenticate with firebase every time a user logs in
+                // store key to avoid loging in everytime.
                 localStorage.setItem(appTokenKey, user.uid);
 
-                // store the token
                 this.props.history.push("/app/home")
                 } else {
                     logout().then(function () {

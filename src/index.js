@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import injectTapEventPlugin from "react-tap-event-plugin";
-import {Redirect, Route, Router} from "react-router";
+import {Redirect, Route, Router, Switch} from "react-router";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import createBrowserHistory from "history/createBrowserHistory";
 import Login from "./components/Login";
