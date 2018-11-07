@@ -1,8 +1,9 @@
 import React from "react";
 import {FontIcon, RaisedButton} from "material-ui";
 import {loginWithGoogle} from "../helpers/auth";
-import {firebaseAuth} from "../config/constants";
+import {firebaseAuth, ref } from "../config/constants";
 import {logout} from "../helpers/auth";
+import {customHistory} from '../index';
 
 const firebaseAuthKey = "firebaseAuthInProgress";
 const appTokenKey = "appToken";
@@ -11,10 +12,6 @@ export default class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            splashScreen: false
-        };
-
         this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
     }
 
@@ -30,8 +27,11 @@ export default class Login extends React.Component {
     componentWillMount() {  
         // We have appToken relevant for our backend API, redirect home
         if (localStorage.getItem(appTokenKey)) {
-            this.props.history.push("/app/home");
+            console.log('App token found');
+            customHistory.push("/app/home");
             return;
+        } else {
+            console.log('No app token');
         }
 
         firebaseAuth().onAuthStateChanged(user => {
@@ -39,17 +39,18 @@ export default class Login extends React.Component {
                 if (user.email.includes('@itesm.mx')) {
 
                 localStorage.removeItem(firebaseAuthKey);
-
+                console.log('on callback');
                 // store key to avoid loging in everytime.
                 localStorage.setItem(appTokenKey, user.uid);
+                localStorage.setItem("currentUser",  JSON.stringify(user));
 
-                this.props.history.push("/app/home")
+                customHistory.push("/app/home");
                 } else {
                     logout().then(function () {
                         localStorage.removeItem(appTokenKey);
                         localStorage.removeItem(firebaseAuthKey);
                         alert('Please use an @itesm.mx account');
-                        this.props.history.push("/login");
+                        customHistory.push("/login");
                     }.bind(this));
                 }
             }

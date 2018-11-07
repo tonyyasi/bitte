@@ -1,15 +1,13 @@
 import React from "react";
 import {logout} from "../helpers/auth";
 import {Header} from './Header';
+import { customHistory } from "../index";
 
 const appTokenKey = "appToken"; // also duplicated in Login.js
 export default class Home extends React.Component {
+    currentUser = JSON.parse(localStorage.getItem('currentUser'));
     constructor(props) {
         super(props);
-
-        this.state = {
-            //firebaseUser: JSON.parse(localStorage.getItem("firebaseUser"))
-        };
 
         //console.log("User:", this.state.firebaseUser);
         this.handleLogout = this.handleLogout.bind(this);
@@ -18,13 +16,14 @@ export default class Home extends React.Component {
     handleLogout() {
         logout().then(function () {
             localStorage.removeItem(appTokenKey);
-            this.props.history.push("/login");
+            customHistory.push("/login");
             console.log("user signed out from firebase");
         }.bind(this));
 
     }
 
     render() {
+        console.log(this.currentUser);
         return (
             <div>
             <Header />

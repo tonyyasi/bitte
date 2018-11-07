@@ -9,6 +9,9 @@ import createBrowserHistory from "history/createBrowserHistory";
 import Login from "./components/Login";
 import Home from './components/Home';
 import Order from './components/Order';
+import Deliver from './components/Deliver';
+import MostOrdered from './components/MostOrdered';
+import PastOrders from './components/PastOrders';
 
 const muiTheme = getMuiTheme({
     appBar: {
@@ -27,6 +30,9 @@ const Root = () => (
                 <Route path="/login" component={Login}/>
                 <Route path="/app/home" component={Home}/>
                 <Route path="/app/order" component={Order} />
+                <Route path='/app/deliver' component={Deliver} />
+                <Route path='/app/most_ordered' component={MostOrdered} />
+                <Route path="/app/past_orders" component={PastOrders} />
                 <Redirect from="/" to="/login"/>
             </div>
         </Router>
