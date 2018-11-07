@@ -1,8 +1,8 @@
 import React from 'react';
 import {Header} from './Header';
 import { TextField, DropDownMenu, MenuItem} from 'material-ui';
-import uuid from 'uuid';
 import {database} from '../config/constants';
+import {customHistory} from './../index';
 
 export default class Order extends React.Component {
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -14,7 +14,8 @@ export default class Order extends React.Component {
             orderDescription:'',
             deliveryLocation: '',
             tip:5,
-            extraInfo: ''
+            extraInfo: '',
+            active:true
         }
 
     }
@@ -62,6 +63,7 @@ export default class Order extends React.Component {
             console.log('Valid Order');
             database.ref(`orders`).push(this.state).then((ref) => {
                 console.log(ref);
+                customHistory.push('/app/deliver');
             });
 
         }
