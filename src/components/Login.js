@@ -1,7 +1,7 @@
 import React from "react";
 import {FontIcon, RaisedButton} from "material-ui";
 import {loginWithGoogle} from "../helpers/auth";
-import {firebaseAuth, ref } from "../config/constants";
+import {firebaseAuth } from "../config/constants";
 import {logout} from "../helpers/auth";
 import {customHistory} from '../index';
 
