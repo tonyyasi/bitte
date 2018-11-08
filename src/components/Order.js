@@ -70,6 +70,8 @@ export default class Order extends React.Component {
                 customHistory.push('/app/deliver');
             });
 
+        } else {
+            alert('Please check your order, remember that the minimum tip is of 5$');
         }
 
     }
