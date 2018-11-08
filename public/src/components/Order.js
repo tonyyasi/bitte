@@ -15,7 +15,11 @@ export default class Order extends React.Component {
             deliveryLocation: '',
             tip:5,
             extraInfo: '',
-            active:true
+            active:true,
+            orderedByName: this.currentUser.displayName,
+            orderedById: this.currentUser.uid,
+            deliveredByName: '',
+            deliveredById: ''
         }
 
     }
