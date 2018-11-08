@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { database } from './../config/constants';
 
 export class OrderListItem extends React.Component {
-
+    currentUser = JSON.parse(localStorage.getItem('currentUser'));
     constructor(props) {
         super(props);
         const order = this.props.order;
@@ -13,9 +13,22 @@ export class OrderListItem extends React.Component {
         };
     }
 
+    handleFinishDeliveryClicked = (e) => {
+        console.log('finish delivrty')
+        const order = {...this.state.order, delivered: true};
+        const { key, ...noKey } = order;
+          database.ref('orders/' + key).update(noKey).then(() => {
+            this.setState(() => {
+                return {
+                    order
+                }
+            });
+        })
+    }
+
     handleDeliverClicked = (e) => {
         console.log('deliver');
-        const order = {...this.state.order, active:false};
+        const order = {...this.state.order, active:false, deliveredById: this.currentUser.uid};
         const { key, ...noKey } = order;
         database.ref('orders/' + key).update(noKey).then(() => {
             this.setState(() => {
@@ -40,10 +53,15 @@ export class OrderListItem extends React.Component {
                     <CardText > {this.state.order.orderDescription + ` Tip: ${this.state.order.tip}`} </CardText>
                     <CardText style={{fontSize: '18px'}} > <b>Order Location: </b></CardText>
                     <CardText > {this.state.order.deliveryLocation} </CardText>
-                    {this.state.order.active ? (<CardActions> 
+                    { this.props.showButtons ? (
+                        this.state.order.active ? 
+                        (<CardActions> 
                         <FlatButton label="Deliver!" onClick={this.handleDeliverClicked} style={{backgroundColor:'gray'}} /> 
-                        </CardActions>) : (
-                        <CardText> Being delivered!</CardText>)
+                        </CardActions>) : ( (this.currentUser.uid === this.state.order.deliveredById) ? ( this.state.order.delivered ? <CardText>Order Delivered!</CardText>
+                            : <CardActions> 
+                        <FlatButton label="Finish Delivery!" onClick={this.handleFinishDeliveryClicked} style={{backgroundColor:'gray'}} /> 
+                        </CardActions>) :
+                        <CardText> Being delivered!</CardText>)) : ( this.state.order.delivered ? <CardText> Order delivered!</CardText> : <CardText>Order being delivered</CardText>)
                     }
                     </Card>   
             </div>
