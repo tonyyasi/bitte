@@ -31,7 +31,7 @@ export default class PastOrders extends React.Component {
         return (
             <div>
                 <Header />
-                <OrderList orders={this.state.userOrders}></OrderList>
+                <OrderList showButtons={false} orders={this.state.userOrders}></OrderList>
 
                 
             </div>

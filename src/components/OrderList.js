@@ -13,7 +13,7 @@ export class OrderList extends React.Component {
             <div>
             {this.props.orders.map((order) => {
                 return (
-                  <OrderListItem key={order.key} order={order} />
+                  <OrderListItem showButtons={this.props.showButtons} key={order.key} order={order} />
                 )
             })}       
             </div>
