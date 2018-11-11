@@ -35,7 +35,7 @@ export default class MostOrdered extends React.Component {
             const drinkSize = drinksOrders.length;
             const miscSize = miscOrders.length;
 
-            if (foodSize > drinkSize && foodSize > miscSize) {
+            if (foodSize >= drinkSize && foodSize >= miscSize) {
                 this.setState(() => {
                 return {orders:foodOrders.slice(0,5), mostOrdered: 'Food'}
             });
