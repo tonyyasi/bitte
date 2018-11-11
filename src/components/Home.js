@@ -2,6 +2,7 @@ import React from "react";
 import {logout} from "../helpers/auth";
 import {Header} from './Header';
 import { customHistory } from "../index";
+import FlatButton from "material-ui/FlatButton";
 
 const appTokenKey = "appToken"; // also duplicated in Login.js
 export default class Home extends React.Component {
@@ -9,17 +10,10 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props);
 
-        //console.log("User:", this.state.firebaseUser);
-        this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleLogout() {
-        logout().then(function () {
-            localStorage.removeItem(appTokenKey);
-            customHistory.push("/login");
-            console.log("user signed out from firebase");
-        }.bind(this));
-
+    handleOrder = () => {
+        customHistory.push('/app/order');
     }
 
     render() {
@@ -27,8 +21,12 @@ export default class Home extends React.Component {
         return (
             <div>
             <Header />
-                <h1>Welcome to Bitte!</h1>
+            <div style={{position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)', fontSize:'120%'}} >
+                <h1>Welcome to Bitte, {this.currentUser.displayName}!</h1>
                 <h3> Your food, when you need it!</h3>
+                <p> Have you ever craved anything, but were not able to get it? Stop craving and start doing</p>
+                <FlatButton backgroundColor='lightgrey' onClick={this.handleOrder} label="Order Now!">  </FlatButton>
+                </div>
             </div>
         );
     }

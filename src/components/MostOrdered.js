@@ -1,12 +1,17 @@
 import React from 'react';
 import {Header} from './Header';
 import {database} from './../config/constants';
+import { OrderList } from './OrderList';
 
 export default class MostOrdered extends React.Component {
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     constructor(props) {
         super(props);
+        this.state = {
+            orders: [],
+            mostOrdered: 'Loading...'
+        };
 
         let foodOrders = [];
         let drinksOrders = [];
@@ -25,13 +30,25 @@ export default class MostOrdered extends React.Component {
                 if (order.selectedCategory === 'Misc') miscOrders.push(order);
 
             });
+
+            const foodSize = foodOrders.length;
+            const drinkSize = drinksOrders.length;
+            const miscSize = miscOrders.length;
+
+            if (foodSize > drinkSize && foodSize > miscSize) {
+                this.setState(() => {
+                return {orders:foodOrders.slice(0,5), mostOrdered: 'Food'}
+            });
+            } else if (drinkSize > foodSize && drinkSize > miscSize) {
+                this.setState(() => {
+                    return {orders:drinksOrders.slice(0,5), mostOrdered: 'Drinks'}
+                });
+            } else {
+                this.setState(() => {
+                    return {orders:miscOrders.slice(0,5), mostOrdered: 'Misc'}
+                });
+            }
             
-            console.log('food', foodOrders);
-            console.log('drinks', drinksOrders);
-            console.log('misc', miscOrders);
-            // this.setState(() => {
-            //     return {orders:this.openOrders}
-            // });
         }).catch((err) => {
             console.log(err);
         });
@@ -44,7 +61,8 @@ export default class MostOrdered extends React.Component {
         return (
             <div>
                 <Header />
-                
+                <h2>The most ordered category is {this.state.mostOrdered} </h2>
+                <OrderList orders={this.state.orders} reorder={true} />
                 
             </div>
         )

@@ -18,7 +18,7 @@ export default class PastOrders extends React.Component {
             });
             console.log(userOrders);
             this.setState(() => {
-                return {userOrders}
+                return {userOrders: userOrders.reverse()}
             });
         }).catch((err) => {
             console.log(err);

@@ -41,11 +41,12 @@ export class OrderListItem extends React.Component {
         
     }  
     render() {
+        const titleText = (this.props.showButtons) ? `Order from: ${this.state.order.orderedByName}` : 'Order';
         return (
             <div>
-                    <Card style={{backgroundColor:'lightgray'}} >
+                    <Card style={{backgroundColor:'lightgray', fontWeight:'550'}} >
                     <CardHeader
-                    title={`Order from: ${this.state.order.orderedByName}`}
+                    title={titleText}
                     titleStyle={{fontSize:'24px'}}
                     subtitle={`${this.state.order.selectedCategory}`}
                     />
@@ -57,11 +58,11 @@ export class OrderListItem extends React.Component {
                         this.state.order.active ? 
                         (<CardActions> 
                         <FlatButton label="Deliver!" onClick={this.handleDeliverClicked} style={{backgroundColor:'gray'}} /> 
-                        </CardActions>) : ( (this.currentUser.uid === this.state.order.deliveredById) ? ( this.state.order.delivered ? <CardText>Order Delivered!</CardText>
+                        </CardActions>) : ( (this.currentUser.uid === this.state.order.deliveredById) ? ( this.state.order.delivered ? <CardText> Status: Order Delivered!</CardText>
                             : <CardActions> 
                         <FlatButton label="Finish Delivery!" onClick={this.handleFinishDeliveryClicked} style={{backgroundColor:'gray'}} /> 
                         </CardActions>) :
-                        <CardText> Being delivered!</CardText>)) : ( this.state.order.delivered ? <CardText> Order delivered!</CardText> : <CardText>Order being delivered</CardText>)
+                        <CardText> Status: Being delivered!</CardText>)) : ( this.state.order.delivered ? <CardText> Status: Order delivered!</CardText> : <CardText> Status: Order in progress</CardText>)
                     }
                     </Card>   
             </div>
