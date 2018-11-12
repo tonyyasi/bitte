@@ -3,6 +3,9 @@ import {Header} from './Header';
 import { database } from './../config/constants';
 import {OrderList} from './OrderList';
 import {SegmentedControl} from 'segmented-control';
+import {validateSession} from '../config/constants';
+import { customHistory } from "../index";
+
 
 export default class Deliver extends React.Component {
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -28,6 +31,12 @@ export default class Deliver extends React.Component {
         }).catch((err) => {
             console.log(err);
         });
+    }
+
+    componentWillMount() {
+        if (!validateSession) {
+            customHistory.push('/');
+        }
     }
 
     snapshotToArray = snapshot => Object.entries(snapshot).map(e => Object.assign(e[1], { key: e[0] }));

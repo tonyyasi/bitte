@@ -2,9 +2,15 @@ import React from "react";
 import {Header} from './Header';
 import { customHistory } from "../index";
 import FlatButton from "material-ui/FlatButton";
+import { validateSession } from "../config/constants";
 
 export default class Home extends React.Component {
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    componentWillMount() {
+        if (!validateSession) {
+            customHistory.push('/');
+        }
+    }
    
 
     handleOrder = () => {

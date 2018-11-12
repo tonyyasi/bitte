@@ -9,8 +9,18 @@ const config = {
     messagingSenderId: "735689773525"
 };
 
+const appTokenKey = "appToken";
+
 firebase.initializeApp(config);
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const database = firebase.database();
 export const firebaseAuth = firebase.auth;
+
+export function validateSession() {
+    if (localStorage.getItem(appTokenKey)) {
+        return true;
+    } else {
+        return false;
+    }
+}

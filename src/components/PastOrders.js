@@ -2,6 +2,8 @@ import React from 'react';
 import {Header} from './Header';
 import {database} from './../config/constants';
 import {OrderList} from './OrderList';
+import { customHistory } from "../index";
+import {validateSession} from '../config/constants';
 
 export default class PastOrders extends React.Component {
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -23,6 +25,12 @@ export default class PastOrders extends React.Component {
         }).catch((err) => {
             console.log(err);
         });
+    }
+
+    componentWillMount() {
+        if (!validateSession) {
+            customHistory.push('/');
+        }
     }
 
     snapshotToArray = snapshot => Object.entries(snapshot).map(e => Object.assign(e[1], { key: e[0] }));
