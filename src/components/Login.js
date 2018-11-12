@@ -28,11 +28,9 @@ export default class Login extends React.Component {
     componentWillMount() {  
         // We have appToken relevant for our backend API, redirect home
         if (localStorage.getItem(appTokenKey)) {
-            console.log('App token found');
             customHistory.push("/app/home");
             return;
         } else {
-            console.log('No app token');
         }
 
         firebaseAuth().onAuthStateChanged(user => {
@@ -40,7 +38,6 @@ export default class Login extends React.Component {
                 if (user.email.includes('@itesm.mx')) {
 
                 localStorage.removeItem(firebaseAuthKey);
-                console.log('on callback');
                 // store key to avoid loging in everytime.
                 localStorage.setItem(appTokenKey, user.uid);
                 localStorage.setItem("currentUser",  JSON.stringify(user));
@@ -59,7 +56,6 @@ export default class Login extends React.Component {
     }
 
     render() {
-        console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
         // if (localStorage.getItem(firebaseAuthKey) === "1") return <SplashScreen />;
         return <LoginPage handleGoogleLogin={this.handleGoogleLogin}/>;
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Header} from './Header';
 import { TextField, DropDownMenu, MenuItem, FlatButton} from 'material-ui';
-import {database} from '../config/constants';
+import {database, validateSession} from '../config/constants';
 import {customHistory} from './../index';
 
 
@@ -10,6 +10,7 @@ export default class Order extends React.Component {
 
     constructor(props) {
         super(props);
+        if(validateSession()) {
         if (customHistory.location.other) {
             const otherOrder = customHistory.location.other;
             this.state = {
@@ -38,7 +39,15 @@ export default class Order extends React.Component {
             deliveredById: ''
         }
     }
+}
 
+    }
+
+    componentWillMount() {
+        if (!validateSession()) {
+            customHistory.push('/');
+            return;
+        }
     }
 
     handleDropDownChange = (event, index, value) => {
@@ -102,6 +111,7 @@ export default class Order extends React.Component {
     categories = ["Food", "Drinks", "Misc"];
 
     render() {
+        if(this.currentUser)
         return (
             <div >
                 <Header />
@@ -159,6 +169,7 @@ export default class Order extends React.Component {
                     </div>
                 
             </div>
-        )
+        );
+        return <p>Order</p>
     }
 }

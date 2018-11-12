@@ -14,7 +14,6 @@ export class OrderListItem extends React.Component {
     }
 
     handleFinishDeliveryClicked = (e) => {
-        console.log('finish delivrty')
         const order = {...this.state.order, delivered: true};
         const { key, ...noKey } = order;
           database.ref('orders/' + key).update(noKey).then(() => {
@@ -27,7 +26,6 @@ export class OrderListItem extends React.Component {
     }
 
     handleDeliverClicked = (e) => {
-        console.log('deliver');
         const order = {...this.state.order, active:false, deliveredById: this.currentUser.uid};
         const { key, ...noKey } = order;
         database.ref('orders/' + key).update(noKey).then(() => {

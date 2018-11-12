@@ -34,7 +34,7 @@ export default class Deliver extends React.Component {
     }
 
     componentWillMount() {
-        if (!validateSession) {
+        if (!validateSession()) {
             customHistory.push('/');
         }
     }

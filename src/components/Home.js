@@ -6,9 +6,12 @@ import { validateSession } from "../config/constants";
 
 export default class Home extends React.Component {
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
     componentWillMount() {
-        if (!validateSession) {
-            customHistory.push('/');
+        if (!validateSession()) {
+            customHistory.push('/login');
+            return;
+        } else {
         }
     }
    
@@ -18,7 +21,7 @@ export default class Home extends React.Component {
     }
 
     render() {
-        console.log(this.currentUser);
+        if(this.currentUser)
         return (
             <div>
             <Header />
@@ -30,5 +33,7 @@ export default class Home extends React.Component {
                 </div>
             </div>
         );
+        else
+        return <p>Home</p>
     }
 }

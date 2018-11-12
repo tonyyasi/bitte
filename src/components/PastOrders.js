@@ -18,7 +18,6 @@ export default class PastOrders extends React.Component {
             const userOrders = orders.filter((order) => {
                 return order.orderedById === this.currentUser.uid
             });
-            console.log(userOrders);
             this.setState(() => {
                 return {userOrders: userOrders.reverse()}
             });
