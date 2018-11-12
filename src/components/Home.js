@@ -1,16 +1,11 @@
 import React from "react";
-import {logout} from "../helpers/auth";
 import {Header} from './Header';
 import { customHistory } from "../index";
 import FlatButton from "material-ui/FlatButton";
 
-const appTokenKey = "appToken"; // also duplicated in Login.js
 export default class Home extends React.Component {
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    constructor(props) {
-        super(props);
-
-    }
+   
 
     handleOrder = () => {
         customHistory.push('/app/order');

@@ -4,6 +4,7 @@ import {loginWithGoogle} from "../helpers/auth";
 import {firebaseAuth } from "../config/constants";
 import {logout} from "../helpers/auth";
 import {customHistory} from '../index';
+import { SignUpHeader } from "./SignUpHeader";
 
 const firebaseAuthKey = "firebaseAuthInProgress";
 const appTokenKey = "appToken";
@@ -51,7 +52,7 @@ export default class Login extends React.Component {
                         localStorage.removeItem(firebaseAuthKey);
                         alert('Please use an @itesm.mx account');
                         customHistory.push("/login");
-                    }.bind(this));
+                    });
                 }
             }
         });
@@ -69,8 +70,11 @@ const iconStyles = {
 };
 const LoginPage = ({handleGoogleLogin}) => (
     <div>
-        <h1>Login</h1>
-        <div>
+    <SignUpHeader />
+        <div style={{position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)', fontSize:'140%'}}>
+        <h1>Welcome to Bitte!</h1>
+        <h2>From Tec students, for Tec students</h2>
+        <p>Bitte is a service that allow students to get the things they want, when they want them. It can also help students gain a bit of money while helping others</p>
             <RaisedButton
                 label="Sign in with Google"
                 labelColor={"#ffffff"}

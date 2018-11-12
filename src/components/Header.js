@@ -10,10 +10,6 @@ const appTokenKey = "appToken";
 
 export class Header extends React.Component { 
 
-    constructor(props) {
-        super(props);
-    }
-
     handleLogout() {
         logout().then(function () {
             localStorage.removeItem(appTokenKey);

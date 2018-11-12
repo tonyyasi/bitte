@@ -18,17 +18,17 @@ export default class MostOrdered extends React.Component {
         let miscOrders = [];
 
         database.ref('orders').once('value').then((snapshot) => {
-            const orders = this.snapshotToArray(snapshot.val());
+            const deliveredOrders = this.snapshotToArray(snapshot.val());
 
-            const deliveredOrders = orders.filter((order) => {
-                return (order.delivered);
-            });
+            // const deliveredOrders = orders.filter((order) => {
+            //     return (order.delivered);
+            // });
 
             deliveredOrders.map((order) => {
                 if (order.selectedCategory === 'Food') foodOrders.push(order);
                 if (order.selectedCategory === 'Drinks') drinksOrders.push(order);
                 if (order.selectedCategory === 'Misc') miscOrders.push(order);
-
+                return null;
             });
 
             const foodSize = foodOrders.length;

@@ -4,11 +4,6 @@ import { ReorderListItem } from './ReorderListItem';
 
 export class OrderList extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         return (
             <div>
